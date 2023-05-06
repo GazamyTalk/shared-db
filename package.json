@@ -1,0 +1,32 @@
+{
+  "name": "shared-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GazamyTalk/shared-db.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GazamyTalk/shared-db/issues"
+  },
+  "homepage": "https://github.com/GazamyTalk/shared-db#readme",
+  "dependencies": {
+    "mongodb": "^5.4.0",
+    "mongoose": "^7.1.0",
+    "mysql2": "^3.2.4",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.0.3",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0"
+  }
+}
