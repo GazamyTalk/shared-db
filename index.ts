@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import MainDB from "@databases/main";
 import ChatDB from "@databases/chat";
 import LoginDB from "@databases/login";
