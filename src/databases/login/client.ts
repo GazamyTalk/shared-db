@@ -1,10 +1,17 @@
 import mysql, { FieldPacket, RowDataPacket, OkPacket } from "mysql2/promise";
-import { loginDBConfig } from "@config/login.db.config";
 
 
 export interface LoginInfo {
     username: string
     password: string
+}
+
+export interface ILoginDBConfig {
+    host: string
+    port: number
+    user: string
+    password: string
+    database: string
 }
 
 interface LoginDBResultData extends RowDataPacket, LoginInfo {};
@@ -32,7 +39,7 @@ export default class LoginDBClient {
     }
 
 
-    static async create(): Promise<LoginDBClient> {
+    static async create(loginDBConfig: ILoginDBConfig): Promise<LoginDBClient> {
         return new LoginDBClient(await mysql.createConnection(loginDBConfig));
     }
 

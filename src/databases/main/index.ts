@@ -1,4 +1,4 @@
-import MainDBClient, { RoomId, RoomInfo, UserInfo, RoomClient, UserClient } from "./client";
+import MainDBClient, { RoomId, RoomInfo, UserInfo, RoomClient, UserClient, IMainDBConfig } from "./client";
 export { UserInfo, RoomInfo, RoomId };
 
 class Rooms {
@@ -128,8 +128,8 @@ export default class MainDB {
         this.rooms = new Rooms(this.mainDBClient.roomClient);
     }
 
-    static async create() {
-        const mainDBClient = await MainDBClient.create();
+    static async create(mainDBConfig: IMainDBConfig) {
+        const mainDBClient = await MainDBClient.create(mainDBConfig);
         return new MainDB(mainDBClient);
     }
 

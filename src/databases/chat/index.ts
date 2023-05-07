@@ -1,5 +1,5 @@
 import { RoomId } from "@databases/main";
-import ChatDBClient, { ChatInfo } from "./client";
+import ChatDBClient, { ChatInfo, IChatDBConfig } from "./client";
 import randomString from "@utils/randomString";
 
 export default class ChatDB {
@@ -9,8 +9,8 @@ export default class ChatDB {
         this.client = client;
     }
 
-    static async create() {
-        return new ChatDB(await ChatDBClient.create());
+    static async create(chatDBConfig: IChatDBConfig) {
+        return new ChatDB(await ChatDBClient.create(chatDBConfig));
     }
 
     async addChat(username: string,

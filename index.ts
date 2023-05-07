@@ -1,40 +1,32 @@
 import MainDB from "@databases/main";
 import ChatDB from "@databases/chat";
 import LoginDB from "@databases/login";
+import { IMainDBConfig } from "@databases/main/client";
+import { IChatDBConfig } from "@databases/chat/client";
+import { ILoginDBConfig } from "@databases/login/client";
+
+export interface IConfig {
+    mainDB?: IMainDBConfig
+    chatDB?: IChatDBConfig
+    loginDB?: ILoginDBConfig
+}
 
 export default class SharedDB {
 
-    mainDB?: MainDB
-    chatDB?: ChatDB
-    loginDB?: LoginDB
+    private mainDB?: MainDB
+    private chatDB?: ChatDB
+    private loginDB?: LoginDB
 
     constructor() {}
 
-    async useUsers() {
-        if ( this.mainDB === undefined ) {
-            this.mainDB = await MainDB.create();
-        }
-        return this;
-    }
-    
-    async useRooms() {
-        return await this.useUsers();
+    static async create(config: IConfig) {
+        const sharedDB = new SharedDB();
+        sharedDB.mainDB = config.mainDB && await MainDB.create(config.mainDB);
+        sharedDB.chatDB = config.chatDB && await ChatDB.create(config.chatDB);
+        sharedDB.loginDB = config.loginDB && await LoginDB.create(config.loginDB);
+        return sharedDB;
     }
 
-    async useChats() {
-        if ( this.chatDB === undefined ) {
-            this.chatDB = await ChatDB.create();
-        }
-        return this;
-    }
-
-    async useLogin() {
-        if ( this.loginDB === undefined ) {
-            this.loginDB = await LoginDB.create();
-        }
-        return this;
-    }
-    
 
     get users() {
         if ( this.mainDB === undefined ) {

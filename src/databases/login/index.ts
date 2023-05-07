@@ -1,4 +1,4 @@
-import LoginDBClient, { LoginInfo } from "@databases/login/client";
+import LoginDBClient, { ILoginDBConfig, LoginInfo } from "@databases/login/client";
 export { LoginInfo };
 
 export default class LoginDB {
@@ -8,8 +8,8 @@ export default class LoginDB {
         this.loginDBClient = loginDBClient;
     }
 
-    static async create() {
-        const loginDBClient = await LoginDBClient.create();
+    static async create(loginDBConfig: ILoginDBConfig) {
+        const loginDBClient = await LoginDBClient.create(loginDBConfig);
         return new LoginDB(loginDBClient);
     }
 

@@ -1,6 +1,5 @@
 import mongodb, { MongoClient, Db, Filter, UpdateFilter, Collection, OptionalId } from "mongodb";
 
-import { chatDBConfig } from "@config/chat.db.config";
 import { RoomId } from "@databases/main";
 
 import { ChatInfo } from "./models/ChatInfo";
@@ -8,6 +7,9 @@ import { ChatInfo } from "./models/ChatInfo";
 export { ChatInfo };
 
 
+export interface IChatDBConfig {
+    uri: string
+}
 
 export default class ChatDBClient {
     private client: MongoClient;
@@ -18,7 +20,7 @@ export default class ChatDBClient {
         this.db = client.db();
     }
 
-    static async create() : Promise<ChatDBClient> {
+    static async create(chatDBConfig: IChatDBConfig) : Promise<ChatDBClient> {
         return new ChatDBClient(await MongoClient.connect(chatDBConfig.uri));
     }
 

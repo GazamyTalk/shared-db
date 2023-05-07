@@ -2,11 +2,14 @@ import mongoose, { Connection, Model, UpdateQuery, FilterQuery } from "mongoose"
 
 import { UserInfo, createUserInfoModel } from "./models/UserInfo";
 import { RoomInfo, createRoomInfoModel, RoomId } from "./models/RoomInfo";
-import { mainDBConfig } from "@config/main.db.config";
 
 export { UserInfo };
 export { RoomInfo, RoomId };
 
+
+export interface IMainDBConfig {
+    uri: string
+}
 
 export class UserClient {
     private UserInfoModel: Model<UserInfo>
@@ -120,7 +123,7 @@ export default class MainDBClient {
         this.roomClient = new RoomClient(this.connection);
     }
 
-    static async create() : Promise<MainDBClient> {
+    static async create(mainDBConfig: IMainDBConfig) : Promise<MainDBClient> {
         return new MainDBClient(await mongoose.createConnection(mainDBConfig.uri))
     }
 
