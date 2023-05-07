@@ -1,4 +1,4 @@
-import MainDB from "@databases/main";
+import MainDB, { RoomDB, UserDB } from "@databases/main";
 import ChatDB from "@databases/chat";
 import LoginDB from "@databases/login";
 import { IMainDBConfig } from "@databases/main/client";
@@ -28,28 +28,28 @@ export default class SharedDB {
     }
 
 
-    get users() {
+    get users() : UserDB {
         if ( this.mainDB === undefined ) {
             throw new Error("Unable to use 'users': mainDB is undefined");
         }
         return this.mainDB.users;
     }
     
-    get rooms() {
+    get rooms() : RoomDB {
         if ( this.mainDB === undefined ) {
             throw new Error("Unable to use 'users': mainDB is undefined");
         }
         return this.mainDB.rooms;
     }
     
-    get chats() {
+    get chats() : ChatDB {
         if ( this.chatDB === undefined ) {
             throw new Error("Unable to use 'chats': chatDB is undefined");
         }
         return this.chatDB;
     }
     
-    get login() {
+    get login() : LoginDB {
         if ( this.loginDB === undefined ) {
             throw new Error("Unable to use 'login': loginDB is undefined");
         }

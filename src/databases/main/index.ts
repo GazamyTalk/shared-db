@@ -1,7 +1,8 @@
 import MainDBClient, { RoomId, RoomInfo, UserInfo, RoomClient, UserClient, IMainDBConfig } from "./client";
 export { UserInfo, RoomInfo, RoomId };
+export { RoomDB, UserDB };
 
-class Rooms {
+class RoomDB {
 
     private roomClient: RoomClient
 
@@ -49,7 +50,7 @@ class Rooms {
 }
 
 
-class Users {
+class UserDB {
 
     private userClient: UserClient
 
@@ -119,13 +120,13 @@ class Users {
 
 export default class MainDB {
     private mainDBClient: MainDBClient
-    public users: Users
-    public rooms: Rooms
+    public users: UserDB
+    public rooms: RoomDB
 
     constructor(mainDBClient: MainDBClient) {
         this.mainDBClient = mainDBClient;
-        this.users = new Users(this.mainDBClient.userClient);
-        this.rooms = new Rooms(this.mainDBClient.roomClient);
+        this.users = new UserDB(this.mainDBClient.userClient);
+        this.rooms = new RoomDB(this.mainDBClient.roomClient);
     }
 
     static async create(mainDBConfig: IMainDBConfig) {
