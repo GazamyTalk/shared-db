@@ -1,6 +1,8 @@
-import { RoomId } from "@databases/main";
+import { RoomId } from "../main";
 import ChatDBClient, { ChatInfo, IChatDBConfig } from "./client";
-import randomString from "@utils/randomString";
+import randomString from "../../utils/randomString";
+
+export { ChatInfo };
 
 export default class ChatDB {
     client: ChatDBClient

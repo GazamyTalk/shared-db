@@ -12,7 +12,9 @@ describe("test chatDB", () => {
     let chatid3: string;
 
     beforeAll(async () => {
-        chatDB = await ChatDB.create()
+        chatDB = await ChatDB.create({
+            uri: process.env.CHAT_DB_URI!
+        })
     })
 
     test("make chat", async () => {

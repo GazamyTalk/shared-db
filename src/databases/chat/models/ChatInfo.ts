@@ -1,4 +1,4 @@
-import { RoomId } from "@databases/main"
+import { RoomId } from "../../main"
 // import { Types } from "mongoose"
 
 // class ChatId extends Types.ObjectId {}

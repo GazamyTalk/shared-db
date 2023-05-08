@@ -8,7 +8,13 @@ describe("test LoginDB", () => {
     let loginDB: LoginDB;
 
     beforeAll(async () => {
-        loginDB = await LoginDB.create();
+        loginDB = await LoginDB.create({
+            host: process.env.LOGIN_DB_HOST!,
+            port: Number.parseInt(process.env.LOGIN_DB_PORT!),
+            user: process.env.LOGIN_DB_USER!,
+            password: process.env.LOGIN_DB_PASSWORD!,
+            database: process.env.LOGIN_DB_DATABASE!,
+        });
     })
 
 

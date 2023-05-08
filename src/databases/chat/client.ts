@@ -1,6 +1,6 @@
 import mongodb, { MongoClient, Db, Filter, UpdateFilter, Collection, OptionalId } from "mongodb";
 
-import { RoomId } from "@databases/main";
+import { RoomId } from "../main";
 
 import { ChatInfo } from "./models/ChatInfo";
 

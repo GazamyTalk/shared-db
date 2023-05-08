@@ -8,7 +8,9 @@ describe("test MainDB", () => {
     let mainDB: MainDB;
 
     beforeAll(async () => {
-        mainDB = await MainDB.create();
+        mainDB = await MainDB.create({
+            uri: process.env.MAIN_DB_URI!
+        });
     })
 
 

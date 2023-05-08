@@ -1,4 +1,4 @@
-import LoginDBClient, { ILoginDBConfig, LoginInfo } from "@databases/login/client";
+import LoginDBClient, { ILoginDBConfig, LoginInfo } from "./client";
 export { LoginInfo };
 
 export default class LoginDB {
