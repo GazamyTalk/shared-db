@@ -4,7 +4,7 @@ export { RoomDB, UserDB };
 declare class RoomDB {
     private roomClient;
     constructor(roomClient: RoomClient);
-    create(): Promise<RoomId>;
+    create(roomImage: string): Promise<RoomId>;
     remove(roomid: RoomId): Promise<void>;
     isExist(roomid: RoomId): Promise<boolean>;
     getInfo(roomid: RoomId): Promise<RoomInfo>;
@@ -16,7 +16,7 @@ declare class RoomDB {
 declare class UserDB {
     private userClient;
     constructor(userClient: UserClient);
-    create(username: string, nickname: string): Promise<void>;
+    create(username: string, nickname: string, userImage: string): Promise<void>;
     remove(username: string): Promise<void>;
     isExist(username: string): Promise<boolean>;
     getInfo(username: string): Promise<UserInfo>;

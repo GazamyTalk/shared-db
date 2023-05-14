@@ -5,6 +5,7 @@ export interface RoomInfo {
     roomid: RoomId;
     roomname: string;
     description: string;
+    roomImage: string;
     users: string[];
 }
 export declare const mutableRoomInfoFields: string[];

@@ -4,6 +4,7 @@ export interface UserInfo {
     username: string;
     nickname: string;
     description: string;
+    userImage: string;
     rooms: RoomId[];
     friends: string[];
 }
