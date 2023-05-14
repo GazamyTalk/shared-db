@@ -10,11 +10,12 @@ class RoomDB {
         this.roomClient = roomClient;
     }
 
-    async create() : Promise<RoomId> {
+    async create(roomImage: string) : Promise<RoomId> {
         const roomid = await this.roomClient.insert({
             users: [],
             roomname: "",
             description: "",
+            roomImage
         })
         return roomid;
     }
@@ -58,11 +59,12 @@ class UserDB {
         this.userClient = userClient;
     }
 
-    async create(username: string, nickname: string) : Promise<void> {
+    async create(username: string, nickname: string, userImage: string) : Promise<void> {
         await this.userClient.insert({
             username,
             nickname,
             description: "",
+            userImage,
             rooms: [],
             friends: [],
         });

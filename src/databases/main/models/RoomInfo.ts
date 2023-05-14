@@ -12,6 +12,7 @@ export interface RoomInfo {
     roomid: RoomId
     roomname: string
     description: string
+    roomImage: string
     users: string[]
 }
 
@@ -22,6 +23,7 @@ const RoomInfoSchema = new Schema(
         roomid: { type: RoomId, auto: true },
         roomname: { type: String, require: true },
         description: { type: String, require: true },
+        roomImage: { type: String, require: true },
         users: { type: Array<number>, require: true }
     }
 )

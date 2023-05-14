@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import LoginDB from "@databases/login";
+import LoginDB from "../../src/databases/login";
 
 describe("test LoginDB", () => {
 

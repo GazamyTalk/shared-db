@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import ChatDB from "@databases/chat";
-import { RoomId } from "@databases/main";
+import ChatDB from "../../src/databases/chat";
+import { RoomId } from "../../src/databases/main";
 
 describe("test chatDB", () => {
 

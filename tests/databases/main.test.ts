@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import MainDB, { RoomId } from "@databases/main";
+import MainDB, { RoomId } from "../../src/databases/main";
 
 describe("test MainDB", () => {
 
@@ -21,15 +21,15 @@ describe("test MainDB", () => {
         let roomid3: RoomId;
 
         beforeAll(async () => {
-            roomid1 = await mainDB.rooms.create();
-            roomid2 = await mainDB.rooms.create();
-            roomid3 = await mainDB.rooms.create();
+            roomid1 = await mainDB.rooms.create("testImagePath");
+            roomid2 = await mainDB.rooms.create("testImagePath");
+            roomid3 = await mainDB.rooms.create("testImagePath");
         })
 
         test("create user", async () => {
-            await mainDB.users.create("__dev_test_username_1", "__dev_test_nickname_1");
-            await mainDB.users.create("__dev_test_username_2", "__dev_test_nickname_2");
-            await mainDB.users.create("__dev_test_username_3", "__dev_test_nickname_3");
+            await mainDB.users.create("__dev_test_username_1", "__dev_test_nickname_1", "testImagePath");
+            await mainDB.users.create("__dev_test_username_2", "__dev_test_nickname_2", "testImagePath");
+            await mainDB.users.create("__dev_test_username_3", "__dev_test_nickname_3", "testImagePath");
         })
 
         test("remove user", async () => {
@@ -51,13 +51,15 @@ describe("test MainDB", () => {
             expect(result.username).toBe("__dev_test_username_1");
             expect(result.nickname).toBe("__dev_test_nickname_1");
             expect(result.description).toBe("__dev_test_description_1");
+            expect(result.userImage).toBe("testImagePath");
             expect(result.friends).toStrictEqual([]);
             expect(result.rooms).toStrictEqual([]);
-
+            
             result = await mainDB.users.getInfo("__dev_test_username_2");
             expect(result.username).toBe("__dev_test_username_2");
             expect(result.nickname).toBe("__dev_test_nickname_2");
             expect(result.description).toBe("");
+            expect(result.userImage).toBe("testImagePath");
             expect(result.friends).toStrictEqual([]);
             expect(result.rooms).toStrictEqual([]);
         })
@@ -119,15 +121,15 @@ describe("test MainDB", () => {
         let roomid3: RoomId;
 
         beforeAll(async () => {
-            await mainDB.users.create("__dev_test_room_username_1", "__dev_test_room_nickname_1");
-            await mainDB.users.create("__dev_test_room_username_2", "__dev_test_room_nickname_2");
-            await mainDB.users.create("__dev_test_room_username_3", "__dev_test_room_nickname_3");
+            await mainDB.users.create("__dev_test_room_username_1", "__dev_test_room_nickname_1", "testImagePath");
+            await mainDB.users.create("__dev_test_room_username_2", "__dev_test_room_nickname_2", "testImagePath");
+            await mainDB.users.create("__dev_test_room_username_3", "__dev_test_room_nickname_3", "testImagePath");
         })
 
         test("create room", async () => {
-            roomid1 = await mainDB.rooms.create();
-            roomid2 = await mainDB.rooms.create();
-            roomid3 = await mainDB.rooms.create();
+            roomid1 = await mainDB.rooms.create("testImagePath");
+            roomid2 = await mainDB.rooms.create("testImagePath");
+            roomid3 = await mainDB.rooms.create("testImagePath");
         })
 
         test("remove room", async () => {
@@ -150,6 +152,7 @@ describe("test MainDB", () => {
             expect(result.roomid.valueOf()).toBe(roomid1.valueOf());
             expect(result.roomname).toBe("");
             expect(result.users).toStrictEqual([]);
+            expect(result.roomImage).toBe("testImagePath");
         })
 
         test("getInfos", async () => {
