@@ -10,7 +10,7 @@ export interface UserInfo {
     friends: string[]
 }
 
-export const mutableUserInfoFields = ['nickname', 'description'];
+export const mutableUserInfoFields = ['nickname', 'description', 'userImage'];
 
 const UserInfoSchema = new Schema(
     {

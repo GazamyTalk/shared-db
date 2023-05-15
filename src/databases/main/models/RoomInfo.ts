@@ -16,7 +16,7 @@ export interface RoomInfo {
     users: string[]
 }
 
-export const mutableRoomInfoFields = ['roomname', 'description'];
+export const mutableRoomInfoFields = ['roomname', 'description', 'roomImage'];
 
 const RoomInfoSchema = new Schema(
     {
