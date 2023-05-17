@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Connection, Model } from "mongoose";
+import mongoose, { Document, Schema, Types, Connection, Model } from "mongoose";
 
 // import { RoomId } from "./ids";
 // export { RoomId };
@@ -6,7 +6,7 @@ import mongoose, { Document, Schema, Connection, Model } from "mongoose";
 // export const RoomId = Schema.Types.ObjectId;
 // export const zeroRoomId = new RoomId('0');
 
-export class RoomId extends Schema.Types.ObjectId {}
+export class RoomId extends Types.ObjectId {}
 
 export interface RoomInfo {
     roomid: RoomId
@@ -20,7 +20,7 @@ export const mutableRoomInfoFields = ['roomname', 'description', 'roomImage'];
 
 const RoomInfoSchema = new Schema(
     {
-        roomid: { type: RoomId, auto: true },
+        roomid: { type: Types.ObjectId, auto: true },
         roomname: { type: String, require: true },
         description: { type: String, require: true },
         roomImage: { type: String, require: true },

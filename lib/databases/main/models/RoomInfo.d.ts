@@ -1,5 +1,5 @@
-import { Schema, Connection, Model } from "mongoose";
-export declare class RoomId extends Schema.Types.ObjectId {
+import { Types, Connection, Model } from "mongoose";
+export declare class RoomId extends Types.ObjectId {
 }
 export interface RoomInfo {
     roomid: RoomId;

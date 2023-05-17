@@ -7,11 +7,16 @@ declare class RoomDB {
     create(roomImage: string): Promise<RoomId>;
     remove(roomid: RoomId): Promise<void>;
     isExist(roomid: RoomId): Promise<boolean>;
+    isMember(roomid: RoomId, username: string): Promise<boolean>;
+    areMembers(roomid: RoomId, usernames: string[]): Promise<boolean[]>;
     getInfo(roomid: RoomId): Promise<RoomInfo>;
     getInfos(roomids: RoomId[]): Promise<RoomInfo[]>;
     setInfo(roomid: RoomId, info: Partial<RoomInfo>): Promise<void>;
     userEnter(roomid: RoomId, username: string): Promise<void>;
+    usersEnterRoom(roomid: RoomId, usernames: string[]): Promise<void>;
     userExit(roomid: RoomId, username: string): Promise<void>;
+    exitRooms(roomids: RoomId[], username: string): Promise<void>;
+    removeEmptyRooms(roomids: RoomId[]): Promise<void>;
 }
 declare class UserDB {
     private userClient;
@@ -25,9 +30,12 @@ declare class UserDB {
     addFriend(username: string, friendname: string): Promise<void>;
     removeFriend(username: string, friendname: string): Promise<boolean>;
     isFriend(username: string, friendname: string): Promise<boolean>;
+    areFriends(username: string, friendnames: string[]): Promise<boolean[]>;
     enterRoom(username: string, roomid: RoomId): Promise<void>;
+    usersEnterRoom(usernames: string[], roomid: RoomId): Promise<void>;
     exitRoom(username: string, roomid: RoomId): Promise<void>;
     isInRoom(username: string, roomid: RoomId): Promise<boolean>;
+    removeFriendFromAll(username: string): Promise<void>;
 }
 export default class MainDB {
     private mainDBClient;

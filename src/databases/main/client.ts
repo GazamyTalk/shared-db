@@ -23,7 +23,7 @@ export class UserClient {
     }
 
     async update(beforeUserInfo: FilterQuery<UserInfo>, afterUserInfo: UpdateQuery<UserInfo>) : Promise<number> {
-        const result = await this.UserInfoModel.updateMany(beforeUserInfo, afterUserInfo);
+        const result = await this.UserInfoModel.updateMany(beforeUserInfo, afterUserInfo, { multi: true });
         return result.matchedCount;
     }
 
@@ -35,7 +35,7 @@ export class UserClient {
     }
 
     async delete(userInfo: FilterQuery<UserInfo>) : Promise<number> {
-        const result = await this.UserInfoModel.deleteMany(userInfo);
+        const result = await this.UserInfoModel.deleteMany(userInfo, { multi: true });
         return result.deletedCount;
     }
 
