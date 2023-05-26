@@ -15,19 +15,21 @@ export default class ChatDB {
         return new ChatDB(await ChatDBClient.create(chatDBConfig));
     }
 
-    async addChat(username: string,
-                  roomid: RoomId,
-                  type: string,
-                  content: string,
-                  time: number) : Promise<string> {
+    async addChat(roomid: RoomId, username: string, chatInfo: Partial<ChatInfo>) : Promise<string> {
+        // if (!(
+        //     typeof chatInfo.content === "string" &&
+        //     typeof chatInfo.type === "string"
+        // )) {
+
+        // }
         const chatid = randomString(12);
         await this.client.insert({
             chatid,
             username,
             roomid,
-            type,
-            content,
-            time
+            type: chatInfo.type!,
+            content: chatInfo.content!,
+            time: chatInfo.time!
         })
         return chatid;
     }
@@ -36,7 +38,12 @@ export default class ChatDB {
         await this.client.deleteOne({ roomid, chatid });
     }
 
-    async getChat(roomid: RoomId, count: number, time: number) : Promise<ChatInfo[]> {
+    async getChat(roomid: RoomId, chatid: string) : Promise<ChatInfo> {
+        const result = await this.client.selectOne({ roomid: roomid, chatid: chatid });
+        return result;
+    }
+
+    async getChats(roomid: RoomId, count: number, time: number) : Promise<ChatInfo[]> {
         const result = await this.client.selectSortLimitTime({ roomid }, count, time);
         return result;
     }

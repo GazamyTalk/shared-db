@@ -5,8 +5,9 @@ export default class ChatDB {
     client: ChatDBClient;
     constructor(client: ChatDBClient);
     static create(chatDBConfig: IChatDBConfig): Promise<ChatDB>;
-    addChat(username: string, roomid: RoomId, type: string, content: string, time: number): Promise<string>;
+    addChat(roomid: RoomId, username: string, chatInfo: Partial<ChatInfo>): Promise<string>;
     removeChat(roomid: RoomId, chatid: string): Promise<void>;
-    getChat(roomid: RoomId, count: number, time: number): Promise<ChatInfo[]>;
+    getChat(roomid: RoomId, chatid: string): Promise<ChatInfo>;
+    getChats(roomid: RoomId, count: number, time: number): Promise<ChatInfo[]>;
     close(): Promise<void>;
 }
