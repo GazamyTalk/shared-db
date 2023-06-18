@@ -9,5 +9,6 @@ export default class ChatDB {
     removeChat(roomid: RoomId, chatid: string): Promise<void>;
     getChat(roomid: RoomId, chatid: string): Promise<ChatInfo>;
     getChats(roomid: RoomId, count: number, time: number): Promise<ChatInfo[]>;
+    removeChatRoom(roomid: RoomId): Promise<void>;
     close(): Promise<void>;
 }

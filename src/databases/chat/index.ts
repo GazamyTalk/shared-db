@@ -48,6 +48,10 @@ export default class ChatDB {
         return result;
     }
 
+    async removeChatRoom(roomid: RoomId) {
+        await this.client.deleteCollection(roomid);
+    }
+
     async close() {
         await this.client.close();
     }

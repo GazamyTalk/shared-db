@@ -95,6 +95,10 @@ export default class ChatDBClient {
         return result;
     }
 
+    async deleteCollection(roomid: RoomId) : Promise<void> {
+        await this.getRoomCollection(roomid).drop();
+    }
+
     async close() : Promise<void> {
         await this.client.close();
     }

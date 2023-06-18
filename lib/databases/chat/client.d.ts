@@ -19,5 +19,6 @@ export default class ChatDBClient {
     select(chatInfo: Filter<ChatInfo>): Promise<ChatInfo[]>;
     selectOne(chatInfo: Filter<ChatInfo>): Promise<ChatInfo>;
     selectSortLimitTime(chatInfo: Filter<ChatInfo>, limit: number, time: number): Promise<ChatInfo[]>;
+    deleteCollection(roomid: RoomId): Promise<void>;
     close(): Promise<void>;
 }
