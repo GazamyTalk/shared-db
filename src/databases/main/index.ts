@@ -1,6 +1,7 @@
 // import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
 import MainDBClient, { RoomId, RoomInfo, UserInfo, RoomClient, UserClient, IMainDBConfig } from "./client";
+import { FriendInfo } from "./models/FriendInfo";
 export { UserInfo, RoomInfo, RoomId };
 export { RoomDB, UserDB };
 
@@ -12,12 +13,13 @@ class RoomDB {
         this.roomClient = roomClient;
     }
 
-    async create(roomImage: string) : Promise<RoomId> {
+    async create(roomImage: string, isOnly2?: boolean) : Promise<RoomId> {
         const roomid = await this.roomClient.insert({
             users: [],
             roomname: "",
             description: "",
             roomImage,
+            isOnly2: isOnly2 ?? false,
         })
         return roomid;
     }
@@ -125,22 +127,22 @@ class UserDB {
         await this.userClient.updateOne({ username }, info);
     }
     
-    async addFriend(username: string, friendname: string) : Promise<void> {
-        await this.userClient.updateOne({ username }, { $push: { friends: friendname } });
+    async addFriend(username: string, friendInfo: FriendInfo) : Promise<void> {
+        await this.userClient.updateOne({ username }, { $push: { friends: friendInfo } });
     }
 
     async removeFriend(username: string, friendname: string) {
-        await this.userClient.updateOne({ username }, { $pull: { friends: friendname } });
+        await this.userClient.updateOne({ username }, { $pull: { friends: { username: friendname } } });
         return true;
     }
 
     async isFriend(username: string, friendname: string) : Promise<boolean> {
-        return (await this.userClient.selectOne({ username })).friends.includes(friendname);
+        return (await this.userClient.selectOne({ username })).friends.map((value) => value.username).includes(friendname);
     }
 
     async areFriends(username: string, friendnames: string[]) : Promise<boolean[]> {
         const friends = (await this.userClient.selectOne({ username })).friends;
-        return friendnames.map((friendname) => friends.includes(friendname));
+        return friendnames.map((friendname) => friends.map((value) => value.username).includes(friendname));
     }
 
     async enterRoom(username: string, roomid: RoomId) : Promise<void> {

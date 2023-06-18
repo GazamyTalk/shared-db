@@ -72,8 +72,8 @@ describe("test MainDB", () => {
         })
 
         test("addFriend", async () => {
-            await mainDB.users.addFriend("__dev_test_username_1", "__dev_test_username_2");
-            await mainDB.users.addFriend("__dev_test_username_1", "__dev_test_username_3");
+            await mainDB.users.addFriend("__dev_test_username_1", { username: "__dev_test_username_2", roomid: "1" }); //tmp
+            await mainDB.users.addFriend("__dev_test_username_1", { username: "__dev_test_username_3", roomid: "2" });
         })
 
         test("removeFriend", async () => {

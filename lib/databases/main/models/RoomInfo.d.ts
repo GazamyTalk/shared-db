@@ -7,6 +7,7 @@ export interface RoomInfo {
     description: string;
     roomImage: string;
     users: string[];
+    isOnly2: boolean;
 }
 export declare const mutableRoomInfoFields: string[];
 export declare function createRoomInfoModel(connection: Connection): Model<RoomInfo>;

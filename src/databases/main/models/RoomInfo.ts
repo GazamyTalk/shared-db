@@ -14,6 +14,7 @@ export interface RoomInfo {
     description: string
     roomImage: string
     users: string[]
+    isOnly2: boolean
 }
 
 export const mutableRoomInfoFields = ['roomname', 'description', 'roomImage'];
@@ -24,7 +25,8 @@ const RoomInfoSchema = new Schema(
         roomname: { type: String, require: true },
         description: { type: String, require: true },
         roomImage: { type: String, require: true },
-        users: { type: Array<number>, require: true }
+        users: { type: Array<number>, require: true },
+        isOnly2: { type: Boolean, require: true }
     }
 )
 

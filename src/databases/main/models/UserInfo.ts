@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, Connection, Model } from "mongoose";
 import { RoomId } from "./RoomInfo";
+import { FriendInfo } from "./FriendInfo";
 
 export interface UserInfo {
     username: string
@@ -7,7 +8,7 @@ export interface UserInfo {
     description: string
     userImage: string
     rooms: RoomId[]
-    friends: string[]
+    friends: FriendInfo[]
 }
 
 export const mutableUserInfoFields = ['nickname', 'description', 'userImage'];
@@ -19,7 +20,7 @@ const UserInfoSchema = new Schema(
         description: { type: String, require: true },
         userImage: { type: String, require: true },
         rooms: { type: Array<number>, require: true },
-        friends: { type: Array<string>, require: true }
+        friends: { type: Array<FriendInfo>, require: true }
     }
 )
 

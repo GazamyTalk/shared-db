@@ -1,10 +1,11 @@
 import MainDBClient, { RoomId, RoomInfo, UserInfo, RoomClient, UserClient, IMainDBConfig } from "./client";
+import { FriendInfo } from "./models/FriendInfo";
 export { UserInfo, RoomInfo, RoomId };
 export { RoomDB, UserDB };
 declare class RoomDB {
     private roomClient;
     constructor(roomClient: RoomClient);
-    create(roomImage: string): Promise<RoomId>;
+    create(roomImage: string, isOnly2?: boolean): Promise<RoomId>;
     remove(roomid: RoomId): Promise<void>;
     isExist(roomid: RoomId): Promise<boolean>;
     isMember(roomid: RoomId, username: string): Promise<boolean>;
@@ -27,7 +28,7 @@ declare class UserDB {
     getInfo(username: string): Promise<UserInfo>;
     getInfos(username: string[]): Promise<UserInfo[]>;
     setInfo(username: string, info: Partial<UserInfo>): Promise<void>;
-    addFriend(username: string, friendname: string): Promise<void>;
+    addFriend(username: string, friendInfo: FriendInfo): Promise<void>;
     removeFriend(username: string, friendname: string): Promise<boolean>;
     isFriend(username: string, friendname: string): Promise<boolean>;
     areFriends(username: string, friendnames: string[]): Promise<boolean[]>;
