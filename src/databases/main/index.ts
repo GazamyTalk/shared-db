@@ -13,11 +13,11 @@ class RoomDB {
         this.roomClient = roomClient;
     }
 
-    async create(roomImage: string, isOnly2?: boolean) : Promise<RoomId> {
+    async create(roomImage: string, isOnly2?: boolean, roomname?: string, description?: string) : Promise<RoomId> {
         const roomid = await this.roomClient.insert({
             users: [],
-            roomname: "",
-            description: "",
+            roomname: roomname ?? "",
+            description: description ?? "",
             roomImage,
             isOnly2: isOnly2 ?? false,
         })

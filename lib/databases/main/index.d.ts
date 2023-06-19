@@ -5,7 +5,7 @@ export { RoomDB, UserDB };
 declare class RoomDB {
     private roomClient;
     constructor(roomClient: RoomClient);
-    create(roomImage: string, isOnly2?: boolean): Promise<RoomId>;
+    create(roomImage: string, isOnly2?: boolean, roomname?: string, description?: string): Promise<RoomId>;
     remove(roomid: RoomId): Promise<void>;
     isExist(roomid: RoomId): Promise<boolean>;
     isMember(roomid: RoomId, username: string): Promise<boolean>;
